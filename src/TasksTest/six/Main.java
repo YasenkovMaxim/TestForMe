@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        // Дан List<Integer>. Оставь только четные числа, отсортируй их по убыванию и собери в новый список.
+       /* // Дан List<Integer>. Оставь только четные числа, отсортируй их по убыванию и собери в новый список.
         List<Integer> numbers = Arrays.asList(10, null, 4, 20, 3, 15, 7, 16);
         List<Integer> newNumbers = Optional.ofNullable(numbers)
                 .orElse(Collections.emptyList())
@@ -76,7 +77,25 @@ public class Main {
                 .filter(ch -> ch == 'a')
                 .count();
 
-        System.out.println("Слова с 'a': " + count);
+        System.out.println("Слова с 'a': " + count);*/
 
+//Сгруппируй людей по возрасту (age) в Map<Integer, List<Person>>
+//
+//Для каждой группы подсчитай количество людей этого возраста
+//
+//Выведи результат на экран в формате: {25=2, 30=2, 35=1, 40=1}
+        List<Person> people = Arrays.asList(
+                new Person("Alice", 25),
+                new Person("Bob", 30),
+                new Person("Charlie", 25),
+                new Person("David", 35),
+                new Person("Eve", 30),
+                new Person("Frank", 40));
+        Map<Integer, List<Person>> groupByAge = people.stream()
+                .collect(Collectors.groupingBy(Person::getAge));
+        System.out.println(groupByAge);
+        java.util.Map<Integer, Long> ageCount = people.stream()
+                .collect(Collectors.groupingBy(Person::getAge, Collectors.counting()));
+        System.out.println(ageCount);
     }
 }
