@@ -97,5 +97,45 @@ public class Main {
         java.util.Map<Integer, Long> ageCount = people.stream()
                 .collect(Collectors.groupingBy(Person::getAge, Collectors.counting()));
         System.out.println(ageCount);
+
+        //Сгруппируй продукты по категории (category) в Map<String, List<Product>>
+        //
+        //Для каждой категории подсчитай количество продуктов
+        //
+        //Выведи результат на экран в формате: {Electronics=3, Clothing=3, Footwear=1}
+        //Найти общую стоимость товаров в каждой категории
+        List<Product> products = Arrays.asList(
+                new Product("Laptop", "Electronics", 1200),
+                new Product("Phone", "Electronics", 800),
+                new Product("Shirt", "Clothing", 50),
+                new Product("Jeans", "Clothing", 80),
+                new Product("Sneakers", "Footwear", 120),
+                new Product("TV", "Electronics", 1500),
+                new Product("Jacket", "Clothing", 200)
+        );
+
+        Map<String, List<Product>> groupedByCategory = products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory));
+        System.out.println(groupedByCategory);
+
+        Map<String, Long> groupedByCategoryAndCount = products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
+        System.out.println(groupedByCategoryAndCount);
+
+        // Найти среднюю цену товара в каждой категории
+        Map<String, Integer> groupedByCategoryAndSumProducts = products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory,
+                        Collectors.summingInt(Product::getPrice)));
+        System.out.println(groupedByCategoryAndSumProducts);
+
+        Map<String, Double> groupedByCategoryAndAveragePrise = products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory, Collectors.averagingDouble(Product::getPrice)));
+        System.out.println(groupedByCategoryAndAveragePrise);
+
+        //Найти самый дорогой товар в каждой категории
+        Map<String, Optional<Product>> groupedByCategoryAndMaxPrice = products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory,
+                        Collectors.maxBy(Comparator.comparingInt(Product::getPrice))));
+        System.out.println(groupedByCategoryAndMaxPrice);
     }
 }
