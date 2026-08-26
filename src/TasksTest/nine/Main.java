@@ -18,7 +18,6 @@ public class Main {
 
     public static boolean isBalanced(String str) {
         ArrayDeque<Character> deque = new ArrayDeque<>();
-
         for (Character c : str.toCharArray()) {
             if (c == '(' || c == '[' || c == '{') {
                 deque.push(c);
