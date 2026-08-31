@@ -1,61 +1,34 @@
 package YandexTaskOne;
 
-import java.util.Arrays;
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int countObstacles = scanner.nextInt();
-
-        int[] coordinatesObstacles = new int[countObstacles];
-        for (int i = 0; i < coordinatesObstacles.length; i++) {
-            int input = scanner.nextInt();
-            if (i != 0 && coordinatesObstacles[i - 1] >= input) {
-                System.out.println("Неверный ввод");
-                i--;
-            } else {
-                coordinatesObstacles[i] = input;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] first = br.readLine().split(" ");
+        int n = Integer.parseInt(first[0]);
+        int t = Integer.parseInt(first[1]);
+        int[] rowCnt = new int[n];
+        int[] colCnt = new int[n];
+        int diag1 = 0;
+        int diag2 = 0;
+        String[] nums = br.readLine().split(" ");
+        for (int round = 1; round <= t; round++) {
+            int a = Integer.parseInt(nums[round - 1]);
+            int row = (a - 1) / n;
+            int col = (a - 1) % n;
+            rowCnt[row]++;
+            colCnt[col]++;
+            if (row == col) diag1++;
+            if (row + col == n - 1) diag2++;
+            if (rowCnt[row] == n || colCnt[col] == n || diag1 == n || diag2 == n) {
+                System.out.println(round);
+                return;
             }
         }
-        System.out.println(Arrays.toString(coordinatesObstacles));
-
-        int[] obstacles = new int[countObstacles];
-        for (int i = 0; i < obstacles.length; i++) {
-            int input = scanner.nextInt();
-            if (input != 1 && input != 2 && input != 3) {
-                System.out.println("Неверный ввод");
-                i--;
-            } else {
-                obstacles[i] = input;
-            }
-        }
-        System.out.println(Arrays.toString(obstacles));
-
-        int countJump = scanner.nextInt();
-
-        int[] coordinatesJumps = new int[countJump];
-        for (int i = 0; i < coordinatesJumps.length; i++) {
-            int input = scanner.nextInt();
-            if (i != 0 && coordinatesJumps[i - 1] >= input) {
-                System.out.println("Неверный ввод");
-                i--;
-            } else {
-                coordinatesJumps[i] = input;
-            }
-        }
-        System.out.println(Arrays.toString(coordinatesJumps));
-
-        int[] jumpingRange = new int[countJump];
-        for (int i = 0; i < jumpingRange.length; i++) {
-            int input = scanner.nextInt();
-            if (input != 1 && input != 2 && input != 4) {
-                System.out.println("Неверный ввод");
-                i--;
-            } else {
-                jumpingRange[i] = input;
-            }
-        }
+        System.out.println(-1);
     }
 }
