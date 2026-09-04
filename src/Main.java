@@ -1,6 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +15,6 @@ public class Main {
             case 5 -> LessonFive.lessonFive();
             default -> System.out.println("Такого занятия нет");
         }
-
         System.out.println();
     }
 }
